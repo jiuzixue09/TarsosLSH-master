@@ -128,7 +128,7 @@ public class MultiIndexHasher {
 	 * Query the data set for query and return the nearest neighbor.
 	 */
 	public Collection<BitSetWithID> query(final BitSetWithID query){
-		return query(query,10);
+		return query(query,1);
 	}
 	
 	/**
