@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import be.tarsos.mih.storage.MIHStorage;
@@ -70,6 +71,7 @@ public class MultiIndexHasher {
 	}
 	
 	/**
+	 * Don't add item with zero <br/>
 	 * Adds an item to the data set.
 	 * @param item The item to add.
 	 */
@@ -172,7 +174,12 @@ public class MultiIndexHasher {
 						if(!results.containsKey(identifier)){
 							long[] dataItem = new long[increment];
 							for(int t = 0 ; t < increment ; t++){
-								dataItem[t] = data[j+t];
+								try {
+									dataItem[t] = data[j+t];
+//									throw new ArrayIndexOutOfBoundsException();
+								}catch (Exception e){
+									LOG.log(Level.INFO,String.format("dataItem.length=%d, data.length=%d,j=%d,t=%d", dataItem.length, data.length, j, t));
+								}
 							}
 							//check if it is a real neighbor, by calculating the hamming distance
 							BitSetWithID neighbor = BitSetWithID.fromLongArray(dataItem);
