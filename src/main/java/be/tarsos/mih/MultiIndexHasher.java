@@ -20,18 +20,10 @@
 
 package be.tarsos.mih;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import be.tarsos.mih.storage.MIHStorage;
+
+import java.util.*;
+import java.util.logging.Logger;
 
 
 /**
@@ -174,12 +166,7 @@ public class MultiIndexHasher {
 						if(!results.containsKey(identifier)){
 							long[] dataItem = new long[increment];
 							for(int t = 0 ; t < increment ; t++){
-								try {
-									dataItem[t] = data[j+t];
-//									throw new ArrayIndexOutOfBoundsException();
-								}catch (Exception e){
-									LOG.log(Level.INFO,String.format("dataItem.length=%d, data.length=%d,j=%d,t=%d", dataItem.length, data.length, j, t));
-								}
+								dataItem[t] = data[j+t];
 							}
 							//check if it is a real neighbor, by calculating the hamming distance
 							BitSetWithID neighbor = BitSetWithID.fromLongArray(dataItem);
